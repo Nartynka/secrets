@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", {
+mongoose.connect("mongodb+srv://cluster0.j3ghf.mongodb.net/myFirstDatabase", {
    useNewUrlParser: true,
    useUnifiedTopology: true,
    useCreateIndex: true
@@ -64,7 +64,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_KEY,
-      callbackURL: "http://localhost:2137/auth/google/callback"
+      callbackURL: process.env.PORT+"/auth/google/callback"
    },
    function(accessToken, refreshToken, profile, cb) {
       // console.log(profile);
@@ -187,6 +187,6 @@ app.get("/logout", (req, res) => {
 
 
 
-app.listen(2137, () => {
+app.listen(process.env.PORT || 2137, () => {
    console.log("Serwer is running on port 2137");
 });
