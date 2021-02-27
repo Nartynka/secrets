@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://cluster0.j3ghf.mongodb.net/myFirstDatabase", {
+mongoose.connect("mongodb+srv://admin:admin@cluster0.j3ghf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
    useNewUrlParser: true,
    useUnifiedTopology: true,
    useCreateIndex: true
