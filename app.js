@@ -148,9 +148,13 @@ app.get("/secrets", function(req, res) {
                   });
                } catch (err){
                   console.log(err);
-                  res.render("secret");
+                  res.render("secret",{
+                     secret: ""
+                  });
                }
-            } else res.render("secrets");
+            } else res.render("secrets",{
+               secret: ""
+            });
          } else {
             console.log(err);
             res.redirect("/login");
