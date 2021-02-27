@@ -148,7 +148,7 @@ app.get("/secrets", function(req, res) {
                   });
                } catch (err){
                   console.log(err);
-                  res.render("secret",{
+                  res.render("secrets",{
                      secret: ""
                   });
                }
