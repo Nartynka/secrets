@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.j3ghf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://admin:admin@cluster0.j3ghf.mongodb.net/users?retryWrites=true&w=majority", {
    useNewUrlParser: true,
    useUnifiedTopology: true,
    useCreateIndex: true
@@ -64,7 +64,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_KEY,
-      callbackURL: process.env.PORT+"/auth/google/callback"
+      callbackURL: process.env.PORT + "/auth/google/callback"
    },
    function(accessToken, refreshToken, profile, cb) {
       // console.log(profile);
@@ -141,9 +141,15 @@ app.get("/secrets", function(req, res) {
       User.findById(req.user._id, function(err, result) {
          if (!err) {
             if (result) {
-               res.render("secrets", {
-                  secret: result.secret[result.secret.length - 1].secret
-               });
+               console.log(result);
+               try {
+                  res.render("secrets", {
+                     secret: result.secret[result.secret.length - 1].secret
+                  });
+               } catch (err){
+                  console.log(err);
+                  res.render("secret");
+               }
             } else res.render("secrets");
          } else {
             console.log(err);
